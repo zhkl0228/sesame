@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEF925075A2100A60ACF /* Interface.storyboard */; };
+		22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEFC25075A2200A60ACF /* Assets.xcassets */; };
+		22DBEF0425075A2200A60ACF /* sesame WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22DBEF0325075A2200A60ACF /* sesame WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBEF0925075A2200A60ACF /* InterfaceController.m */; };
+		22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBEF0C25075A2200A60ACF /* ExtensionDelegate.m */; };
+		22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBEF0F25075A2200A60ACF /* NotificationController.m */; };
+		22DBEF1225075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEF1125075A2200A60ACF /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22DBEEF625075A2000A60ACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22DBEEEA25075A2000A60ACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22DBEEF325075A2000A60ACF;
+			remoteInfo = "sesame WatchKit App";
+		};
+		22DBEF0525075A2200A60ACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22DBEEEA25075A2000A60ACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22DBEF0225075A2200A60ACF;
+			remoteInfo = "sesame WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22DBEF1A25075A2200A60ACF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				22DBEF0425075A2200A60ACF /* sesame WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DBEF1E25075A2200A60ACF /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		22DBEEFC25075A2200A60ACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22DBEEFE25075A2200A60ACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22DBEF0325075A2200A60ACF /* sesame WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "sesame WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DBEF0825075A2200A60ACF /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		22DBEF0925075A2200A60ACF /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		22DBEF0B25075A2200A60ACF /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
+		22DBEF0C25075A2200A60ACF /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
+		22DBEF0E25075A2200A60ACF /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		22DBEF0F25075A2200A60ACF /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		22DBEF1125075A2200A60ACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22DBEF1325075A2200A60ACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22DBEF1425075A2200A60ACF /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22DBEF0025075A2200A60ACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22DBEEE925075A2000A60ACF = {
+			isa = PBXGroup;
+			children = (
+				22DBEEF825075A2000A60ACF /* sesame WatchKit App */,
+				22DBEF0725075A2200A60ACF /* sesame WatchKit Extension */,
+				22DBEEF125075A2000A60ACF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22DBEEF125075A2000A60ACF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22DBEEF025075A2000A60ACF /* sesame.app */,
+				22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */,
+				22DBEF0325075A2200A60ACF /* sesame WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22DBEEF825075A2000A60ACF /* sesame WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				22DBEEF925075A2100A60ACF /* Interface.storyboard */,
+				22DBEEFC25075A2200A60ACF /* Assets.xcassets */,
+				22DBEEFE25075A2200A60ACF /* Info.plist */,
+			);
+			path = "sesame WatchKit App";
+			sourceTree = "<group>";
+		};
+		22DBEF0725075A2200A60ACF /* sesame WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				22DBEF0825075A2200A60ACF /* InterfaceController.h */,
+				22DBEF0925075A2200A60ACF /* InterfaceController.m */,
+				22DBEF0B25075A2200A60ACF /* ExtensionDelegate.h */,
+				22DBEF0C25075A2200A60ACF /* ExtensionDelegate.m */,
+				22DBEF0E25075A2200A60ACF /* NotificationController.h */,
+				22DBEF0F25075A2200A60ACF /* NotificationController.m */,
+				22DBEF1125075A2200A60ACF /* Assets.xcassets */,
+				22DBEF1325075A2200A60ACF /* Info.plist */,
+				22DBEF1425075A2200A60ACF /* PushNotificationPayload.apns */,
+			);
+			path = "sesame WatchKit Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22DBEEEF25075A2000A60ACF /* sesame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22DBEF1F25075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame" */;
+			buildPhases = (
+				22DBEEEE25075A2000A60ACF /* Resources */,
+				22DBEF1E25075A2200A60ACF /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22DBEEF725075A2000A60ACF /* PBXTargetDependency */,
+			);
+			name = sesame;
+			productName = sesame;
+			productReference = 22DBEEF025075A2000A60ACF /* sesame.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		22DBEEF325075A2000A60ACF /* sesame WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22DBEF1B25075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame WatchKit App" */;
+			buildPhases = (
+				22DBEEF225075A2000A60ACF /* Resources */,
+				22DBEF1A25075A2200A60ACF /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22DBEF0625075A2200A60ACF /* PBXTargetDependency */,
+			);
+			name = "sesame WatchKit App";
+			productName = "sesame WatchKit App";
+			productReference = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		22DBEF0225075A2200A60ACF /* sesame WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22DBEF1725075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame WatchKit Extension" */;
+			buildPhases = (
+				22DBEEFF25075A2200A60ACF /* Sources */,
+				22DBEF0025075A2200A60ACF /* Frameworks */,
+				22DBEF0125075A2200A60ACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "sesame WatchKit Extension";
+			productName = "sesame WatchKit Extension";
+			productReference = 22DBEF0325075A2200A60ACF /* sesame WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22DBEEEA25075A2000A60ACF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "廖正凯";
+				TargetAttributes = {
+					22DBEEEF25075A2000A60ACF = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					22DBEEF325075A2000A60ACF = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					22DBEF0225075A2200A60ACF = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 22DBEEED25075A2000A60ACF /* Build configuration list for PBXProject "sesame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22DBEEE925075A2000A60ACF;
+			productRefGroup = 22DBEEF125075A2000A60ACF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22DBEEEF25075A2000A60ACF /* sesame */,
+				22DBEEF325075A2000A60ACF /* sesame WatchKit App */,
+				22DBEF0225075A2200A60ACF /* sesame WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22DBEEEE25075A2000A60ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DBEEF225075A2000A60ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */,
+				22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DBEF0125075A2200A60ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DBEF1225075A2200A60ACF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22DBEEFF25075A2200A60ACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */,
+				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
+				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22DBEEF725075A2000A60ACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22DBEEF325075A2000A60ACF /* sesame WatchKit App */;
+			targetProxy = 22DBEEF625075A2000A60ACF /* PBXContainerItemProxy */;
+		};
+		22DBEF0625075A2200A60ACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22DBEF0225075A2200A60ACF /* sesame WatchKit Extension */;
+			targetProxy = 22DBEF0525075A2200A60ACF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22DBEEF925075A2100A60ACF /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22DBEEFA25075A2100A60ACF /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22DBEF1525075A2200A60ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		22DBEF1625075A2200A60ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22DBEF1825075A2200A60ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				INFOPLIST_FILE = "sesame WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		22DBEF1925075A2200A60ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				INFOPLIST_FILE = "sesame WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		22DBEF1C25075A2200A60ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				IBSC_MODULE = sesame_WatchKit_Extension;
+				INFOPLIST_FILE = "sesame WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		22DBEF1D25075A2200A60ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				IBSC_MODULE = sesame_WatchKit_Extension;
+				INFOPLIST_FILE = "sesame WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		22DBEF2025075A2200A60ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22DBEF2125075A2200A60ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SJLXVCAHF;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zhkl0228.sesame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22DBEEED25075A2000A60ACF /* Build configuration list for PBXProject "sesame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DBEF1525075A2200A60ACF /* Debug */,
+				22DBEF1625075A2200A60ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22DBEF1725075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DBEF1825075A2200A60ACF /* Debug */,
+				22DBEF1925075A2200A60ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22DBEF1B25075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DBEF1C25075A2200A60ACF /* Debug */,
+				22DBEF1D25075A2200A60ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22DBEF1F25075A2200A60ACF /* Build configuration list for PBXNativeTarget "sesame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DBEF2025075A2200A60ACF /* Debug */,
+				22DBEF2125075A2200A60ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22DBEEEA25075A2000A60ACF /* Project object */;
+}

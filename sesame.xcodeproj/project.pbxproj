@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A29CC2507BC0F00530C2C /* BleDoor.m */; };
 		22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEF925075A2100A60ACF /* Interface.storyboard */; };
 		22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEFC25075A2200A60ACF /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 		22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBEF0C25075A2200A60ACF /* ExtensionDelegate.m */; };
 		22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBEF0F25075A2200A60ACF /* NotificationController.m */; };
 		22DBEF1225075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEF1125075A2200A60ACF /* Assets.xcassets */; };
+		22DBEF242507641200A60ACF /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DBEF232507641200A60ACF /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		223A29CB2507BC0F00530C2C /* BleDoor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleDoor.h; sourceTree = "<group>"; };
+		223A29CC2507BC0F00530C2C /* BleDoor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleDoor.m; sourceTree = "<group>"; };
 		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 		22DBEF1125075A2200A60ACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22DBEF1325075A2200A60ACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DBEF1425075A2200A60ACF /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		22DBEF232507641200A60ACF /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22DBEF242507641200A60ACF /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +100,7 @@
 				22DBEEF825075A2000A60ACF /* sesame WatchKit App */,
 				22DBEF0725075A2200A60ACF /* sesame WatchKit Extension */,
 				22DBEEF125075A2000A60ACF /* Products */,
+				22DBEF222507641200A60ACF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,8 +136,18 @@
 				22DBEF1125075A2200A60ACF /* Assets.xcassets */,
 				22DBEF1325075A2200A60ACF /* Info.plist */,
 				22DBEF1425075A2200A60ACF /* PushNotificationPayload.apns */,
+				223A29CB2507BC0F00530C2C /* BleDoor.h */,
+				223A29CC2507BC0F00530C2C /* BleDoor.m */,
 			);
 			path = "sesame WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		22DBEF222507641200A60ACF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22DBEF232507641200A60ACF /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */,
+				223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
 				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
 			);
@@ -417,7 +435,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -438,7 +456,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -455,7 +473,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -472,7 +490,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};

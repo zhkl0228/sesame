@@ -7,25 +7,86 @@
 //
 
 #import "ExtensionDelegate.h"
+#import "BleDoor.h"
 
 @implementation ExtensionDelegate
 
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    NSLog(@"centralManagerDidUpdateState central=%@", central);
+}
+
+- (void)centralManager:(CBCentralManager *)central
+  didConnectPeripheral:(CBPeripheral *)peripheral {
+    NSLog(@"didConnectPeripheral peripheral=%@", peripheral);
+    [peripheral discoverServices:nil];
+}
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
+    advertisementData:(NSDictionary<NSString *,id> *)advertisementData
+                  RSSI:(NSNumber *)RSSI {
+    unsigned short manufacturerId = 0;
+    NSString *name = [peripheral name];
+    NSData *manufacturerData = [advertisementData valueForKey:CBAdvertisementDataManufacturerDataKey];
+    if(manufacturerData) {
+        [manufacturerData getBytes:&manufacturerId length:sizeof(manufacturerId)];
+    }
+    NSLog(@"didDiscoverPeripheral central=%@, peripheral=%@, manufacturerData=%@, RSSI=%@, manufacturerId=0x%x, name=%@", central, peripheral, manufacturerData, RSSI, manufacturerId, name);
+    
+    if(manufacturerId == 0x4f4c) {
+        unsigned char dev_type = 0;
+        unsigned char fw_type = 0;
+        int dev_id = 0;
+        char mac[6];
+        [manufacturerData getBytes:&dev_type range:NSMakeRange(2, 1)];
+        [manufacturerData getBytes:&fw_type range:NSMakeRange(3, 1)];
+        [manufacturerData getBytes:&dev_id range:NSMakeRange(4, 4)];
+        [manufacturerData getBytes:mac range:NSMakeRange(8, sizeof(mac))];
+        
+        dev_id = ntohl(dev_id);
+        char buf[18];
+        int pos = 0;
+        for(int i = 0; i < 6; i++) {
+            pos += sprintf(&buf[pos], "%02X", mac[i] & 0xff);
+        }
+        
+        NSString *mac_address = [NSString stringWithFormat:@"%s", buf];
+        BleDoor *door = [BleDoor new];
+        [door setMac_address:mac_address];
+        [peripheral setDelegate:door];
+        NSLog(@"connectPeripheral dev_type=%u, fw_type=%u, dev_id=%d, mac=%@", dev_type, fw_type, dev_id, mac_address);
+        [central connectPeripheral:peripheral options:nil];
+    }
+}
+
 - (void)applicationDidFinishLaunching {
-    // Perform any final initialization of your application.
+    self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    NSLog(@"applicationDidFinishLaunching centralManager=%@", self.centralManager);
 }
 
 - (void)applicationDidBecomeActive {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    CBManagerState state = [self.centralManager state];
+    NSLog(@"applicationDidBecomeActive state=%d", state);
+    
+    if(state == CBManagerStatePoweredOn && ![self.centralManager isScanning]) {
+         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+    }
 }
 
 - (void)applicationWillResignActive {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, etc.
+    NSLog(@"applicationWillResignActive");
+    
+    if([self.centralManager isScanning]) {
+        [self.centralManager stopScan];
+    }
+}
+
+- (void)applicationDidEnterBackground {
+    NSLog(@"applicationDidEnterBackground");
 }
 
 - (void)handleBackgroundTasks:(NSSet<WKRefreshBackgroundTask *> *)backgroundTasks {
-    // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
     for (WKRefreshBackgroundTask * task in backgroundTasks) {
+        NSLog(@"handleBackgroundTasks task=%@", task);
         // Check the Class of each task to decide how to process it
         if ([task isKindOfClass:[WKApplicationRefreshBackgroundTask class]]) {
             // Be sure to complete the background task once you’re done.

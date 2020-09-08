@@ -21,7 +21,6 @@
     if (self){
         // Initialize variables here.
         // Configure interface objects here.
-        
     }
     return self;
 }

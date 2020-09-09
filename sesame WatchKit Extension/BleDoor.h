@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BleDoor : NSObject <CBPeripheralDelegate>
 
-@property (retain, nonatomic) NSString *mac_address;
+@property (retain, nonatomic) NSString *macAddress;
 
 @end
 

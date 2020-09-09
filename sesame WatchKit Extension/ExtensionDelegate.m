@@ -23,6 +23,7 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     NSLog(@"didFailToConnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
     
+    [doorDict removeObjectForKey:[[peripheral identifier]UUIDString]];
     if(discoveredPeripheral) {
         [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
         discoveredPeripheral = nil;
@@ -34,6 +35,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     NSLog(@"didDisconnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
     
+    [doorDict removeObjectForKey:[[peripheral identifier]UUIDString]];
     if(discoveredPeripheral == peripheral) {
         discoveredPeripheral = nil;
     }
@@ -77,23 +79,22 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
         }
         buf[pos-1] = 0;
         
-        NSString *mac_address = [NSString stringWithFormat:@"%s", buf];
+        NSString *macAddress = [NSString stringWithFormat:@"%s", buf];
         BleDoor *door = [BleDoor new];
-        [door setMac_address:mac_address];
-        [doorDict setValue:door forKey:[[peripheral identifier]UUIDString]];
-        NSLog(@"connectPeripheral dev_type=%u, fw_type=%u, dev_id=%d, mac=%@", dev_type, fw_type, dev_id, mac_address);
-        [self tryConnectPeripheral:peripheral];
+        [door setMacAddress:macAddress];
+        NSLog(@"connectPeripheral dev_type=%u, fw_type=%u, dev_id=%d, macAddress=%@", dev_type, fw_type, dev_id, macAddress);
+        [self tryConnectPeripheral:peripheral door: door];
     }
 }
 
-- (void) tryConnectPeripheral: (CBPeripheral *) peripheral {
+- (void) tryConnectPeripheral: (CBPeripheral *) peripheral door: (BleDoor *) door {
     if(discoveredPeripheral != nil && discoveredPeripheral != peripheral) {
         return;
     }
-    
+
     discoveredPeripheral = peripheral;
+    [doorDict setValue:door forKey:[[peripheral identifier]UUIDString]];
     [self.centralManager connectPeripheral:peripheral options:[NSDictionary dictionary]];
-    [self.centralManager stopScan];
 }
 
 - (void)applicationDidFinishLaunching {
@@ -115,18 +116,18 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void)applicationWillResignActive {
     NSLog(@"applicationWillResignActive");
     
-    if([self.centralManager isScanning]) {
-        [self.centralManager stopScan];
-    }
+//    if([self.centralManager isScanning]) {
+//        [self.centralManager stopScan];
+//    }
 }
 
 - (void)applicationDidEnterBackground {
     NSLog(@"applicationDidEnterBackground discoveredPeripheral=%@", discoveredPeripheral);
     
-    if(discoveredPeripheral) {
-        [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
-        discoveredPeripheral = nil;
-    }
+//    if(discoveredPeripheral) {
+//        [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
+//        discoveredPeripheral = nil;
+//    }
 }
 
 - (void)handleBackgroundTasks:(NSSet<WKRefreshBackgroundTask *> *)backgroundTasks {

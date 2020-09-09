@@ -10,7 +10,7 @@
 
 @implementation BleDoor
 
-@synthesize mac_address;
+@synthesize macAddress;
 
 static NSData *decode_hex(NSString *hexString) {
     const char *chars = [hexString UTF8String];
@@ -75,7 +75,7 @@ static void unlock_door(CBPeripheral *peripheral, CBCharacteristic *characterist
         CBUUID *u = [characteristic UUID];
         if([u isEqual:[CBUUID UUIDWithString:@"00002561-0000-1000-8000-00805f9b34fb"]]) {
             NSLog(@"didDiscoverServices found char1 ble door");
-            unlock_door(peripheral, characteristic, mac_address);
+            unlock_door(peripheral, characteristic, macAddress);
             break;
         }
     }

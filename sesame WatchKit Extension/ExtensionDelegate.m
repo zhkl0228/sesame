@@ -9,6 +9,9 @@
 #import "ExtensionDelegate.h"
 #import "BleDoor.h"
 
+static NSMutableDictionary<NSString*, BleDoor*> *doorDict;
+static CBPeripheral *discoveredPeripheral;
+
 @implementation ExtensionDelegate
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
@@ -16,21 +19,45 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central
+didFailToConnectPeripheral:(CBPeripheral *)peripheral
+                 error:(NSError *)error {
+    NSLog(@"didFailToConnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
+    
+    if(discoveredPeripheral) {
+        [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
+        discoveredPeripheral = nil;
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central
+didDisconnectPeripheral:(CBPeripheral *)peripheral
+                 error:(NSError *)error {
+    NSLog(@"didDisconnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
+    
+    if(discoveredPeripheral == peripheral) {
+        discoveredPeripheral = nil;
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     NSLog(@"didConnectPeripheral peripheral=%@", peripheral);
-    [peripheral discoverServices:nil];
+    BleDoor *door = [doorDict valueForKey:[[peripheral identifier]UUIDString]];
+    if(door) {
+        [peripheral setDelegate:door];
+        [peripheral discoverServices:nil];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
     advertisementData:(NSDictionary<NSString *,id> *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     unsigned short manufacturerId = 0;
-    NSString *name = [peripheral name];
     NSData *manufacturerData = [advertisementData valueForKey:CBAdvertisementDataManufacturerDataKey];
-    if(manufacturerData) {
+    if(manufacturerData && [manufacturerData length] >= sizeof(manufacturerId)) {
         [manufacturerData getBytes:&manufacturerId length:sizeof(manufacturerId)];
     }
-    NSLog(@"didDiscoverPeripheral central=%@, peripheral=%@, manufacturerData=%@, RSSI=%@, manufacturerId=0x%x, name=%@", central, peripheral, manufacturerData, RSSI, manufacturerId, name);
+    NSLog(@"didDiscoverPeripheral central=%@, peripheral=%@, manufacturerData=%@, RSSI=%@, manufacturerId=0x%x", central, peripheral, manufacturerData, RSSI, manufacturerId);
     
     if(manufacturerId == 0x4f4c) {
         unsigned char dev_type = 0;
@@ -43,22 +70,35 @@
         [manufacturerData getBytes:mac range:NSMakeRange(8, sizeof(mac))];
         
         dev_id = ntohl(dev_id);
-        char buf[18];
+        char buf[20];
         int pos = 0;
         for(int i = 0; i < 6; i++) {
-            pos += sprintf(&buf[pos], "%02X", mac[i] & 0xff);
+            pos += sprintf(&buf[pos], "%02X:", mac[i] & 0xff);
         }
+        buf[pos-1] = 0;
         
         NSString *mac_address = [NSString stringWithFormat:@"%s", buf];
         BleDoor *door = [BleDoor new];
         [door setMac_address:mac_address];
-        [peripheral setDelegate:door];
+        [doorDict setValue:door forKey:[[peripheral identifier]UUIDString]];
         NSLog(@"connectPeripheral dev_type=%u, fw_type=%u, dev_id=%d, mac=%@", dev_type, fw_type, dev_id, mac_address);
-        [central connectPeripheral:peripheral options:nil];
+        [self tryConnectPeripheral:peripheral];
     }
 }
 
+- (void) tryConnectPeripheral: (CBPeripheral *) peripheral {
+    if(discoveredPeripheral != nil && discoveredPeripheral != peripheral) {
+        return;
+    }
+    
+    discoveredPeripheral = peripheral;
+    [self.centralManager connectPeripheral:peripheral options:[NSDictionary dictionary]];
+    [self.centralManager stopScan];
+}
+
 - (void)applicationDidFinishLaunching {
+    doorDict = [NSMutableDictionary dictionaryWithCapacity:100];
+    discoveredPeripheral = nil;
     self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     NSLog(@"applicationDidFinishLaunching centralManager=%@", self.centralManager);
 }
@@ -81,7 +121,12 @@
 }
 
 - (void)applicationDidEnterBackground {
-    NSLog(@"applicationDidEnterBackground");
+    NSLog(@"applicationDidEnterBackground discoveredPeripheral=%@", discoveredPeripheral);
+    
+    if(discoveredPeripheral) {
+        [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
+        discoveredPeripheral = nil;
+    }
 }
 
 - (void)handleBackgroundTasks:(NSSet<WKRefreshBackgroundTask *> *)backgroundTasks {

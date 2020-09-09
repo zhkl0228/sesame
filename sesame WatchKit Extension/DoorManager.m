@@ -47,8 +47,13 @@
 }
 
 - (void)stopScan {
+    NSLog(@"stopScan discoveredPeripheral=%@", self.discoveredPeripheral);
     if([self.centralManager isScanning]) {
         [self.centralManager stopScan];
+    }
+    if(self.discoveredPeripheral) {
+        [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
+        self.discoveredPeripheral = nil;
     }
 }
 

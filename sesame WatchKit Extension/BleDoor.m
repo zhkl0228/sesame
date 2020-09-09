@@ -6,42 +6,62 @@
 //  Copyright © 2020 廖正凯. All rights reserved.
 //
 
+#import <WatchKit/WatchKit.h>
 #import "BleDoor.h"
+#import "NSData+FastHex.h"
+#import "MF_Base64Additions.h"
 
 @implementation BleDoor
 
-@synthesize macAddress;
-
-static NSData *decode_hex(NSString *hexString) {
-    const char *chars = [hexString UTF8String];
-    int i = 0;
-    NSUInteger len = hexString.length;
-
-    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
-    char byteChars[3] = {'\0','\0','\0'};
-    unsigned long wholeByte;
-
-    while (i < len) {
-        byteChars[0] = chars[i++];
-        byteChars[1] = chars[i++];
-        wholeByte = strtoul(byteChars, NULL, 16);
-        [data appendBytes:&wholeByte length:1];
++ (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData {
+    NSData *manufacturerData = [advertisementData valueForKey:CBAdvertisementDataManufacturerDataKey];
+    if(manufacturerData && [manufacturerData length] > 2) {
+        unsigned short manufacturerId = 0;
+        [manufacturerData getBytes:&manufacturerId length:2];
+        if(manufacturerId == 0x4f4c) { // lopesdk BleDoorV2
+            unsigned char dev_type = 0;
+            unsigned char fw_type = 0;
+            int dev_id = 0;
+            char mac[6];
+            [manufacturerData getBytes:&dev_type range:NSMakeRange(2, 1)];
+            [manufacturerData getBytes:&fw_type range:NSMakeRange(3, 1)];
+            [manufacturerData getBytes:&dev_id range:NSMakeRange(4, 4)];
+            [manufacturerData getBytes:mac range:NSMakeRange(8, sizeof(mac))];
+            
+            dev_id = ntohl(dev_id);
+            char buf[20];
+            int pos = 0;
+            for(int i = 0; i < 6; i++) {
+                pos += sprintf(&buf[pos], "%02X:", mac[i] & 0xff);
+            }
+            buf[pos-1] = 0;
+            
+            NSString *macAddress = [NSString stringWithFormat:@"%s", buf];
+            return [[BleDoor alloc] initWithMacAddress: macAddress];
+        }
     }
-    return data;
+    return nil;
 }
 
-static void unlock_door(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSString *mac) {
+- (BleDoor *) initWithMacAddress: (NSString *) _macAddress {
+    if((self = [super init])) {
+        self.macAddress = _macAddress;
+    }
+    return self;
+}
+
+- (void) unlock: (CBPeripheral *)peripheral withCharacteristic: (CBCharacteristic *) characteristic {
     NSDictionary *keys = [[NSDictionary alloc]initWithObjectsAndKeys:
-    @"b90d2e22097250e6aa5e3bfffc5fa7a3", @"B0:7E:11:F4:D9:D1",
-    @"8bea73af1a7c2edb08280267a613aea7", @"30:45:11:6B:9E:80",
-    @"9f1cca04598752af8527daa6de4044f8", @"40:BD:32:AF:A5:FD",
-    @"225dc84f20d61b880be1ac5a5ed37d54", @"50:F1:4A:F8:79:3A",
-    @"0b63664b188c9cac6e5cdf63bd5d5cd3", @"B0:7E:11:F4:F3:87",
-    @"37ce9de84414836658092c766272120f", @"40:BD:32:AF:AC:1D", nil];
+    @"uQ0uIglyUOaqXjv//F+now", @"B0:7E:11:F4:D9:D1",
+    @"i+pzrxp8LtsIKAJnphOupw", @"30:45:11:6B:9E:80",
+    @"nxzKBFmHUq+FJ9qm3kBE+A", @"40:BD:32:AF:A5:FD",
+    @"Il3ITyDWG4gL4axaXtN9VA", @"50:F1:4A:F8:79:3A",
+    @"C2NmSxiMnKxuXN9jvV1c0w", @"B0:7E:11:F4:F3:87",
+    @"N86d6EQUg2ZYCSx2YnISDw", @"40:BD:32:AF:AC:1D", nil];
     
-    NSString *secretKey = [keys objectForKey:mac];
+    NSString *secretKey = [keys objectForKey:self.macAddress];
     if(secretKey) {
-        NSData *pwd = decode_hex(secretKey);
+        NSData *pwd = [NSData dataWithBase64String:secretKey];
         
         int8_t command = -127;
         int8_t data[20];
@@ -59,8 +79,9 @@ static void unlock_door(CBPeripheral *peripheral, CBCharacteristic *characterist
         NSData *block = [NSData dataWithBytes:data length:20];
         NSLog(@"unlock_door peripheral=%@, characteristic=%@, secretKey=%@, pwd=%@, block=%@", peripheral, characteristic, secretKey, pwd, block);
         [peripheral writeValue:block forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeSuccess];
     } else {
-        NSLog(@"unlock_door peripheral=%@, characteristic=%@, secretKey=%@, mac=%@", peripheral, characteristic, secretKey, mac);
+        NSLog(@"unlock peripheral=%@, characteristic=%@, secretKey=%@, macAddress=%@", peripheral, characteristic, secretKey, self.macAddress);
     }
 }
 
@@ -75,7 +96,7 @@ static void unlock_door(CBPeripheral *peripheral, CBCharacteristic *characterist
         CBUUID *u = [characteristic UUID];
         if([u isEqual:[CBUUID UUIDWithString:@"00002561-0000-1000-8000-00805f9b34fb"]]) {
             NSLog(@"didDiscoverServices found char1 ble door");
-            unlock_door(peripheral, characteristic, macAddress);
+            [self unlock:peripheral withCharacteristic:characteristic];
             break;
         }
     }

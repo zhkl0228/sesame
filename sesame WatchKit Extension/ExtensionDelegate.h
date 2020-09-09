@@ -7,8 +7,6 @@
 //
 
 #import <WatchKit/WatchKit.h>
-#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ExtensionDelegate : NSObject <WKExtensionDelegate, CBCentralManagerDelegate>
-@property (strong, nonatomic) CBCentralManager *centralManager;
+@interface ExtensionDelegate : NSObject <WKExtensionDelegate>
 @end

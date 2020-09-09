@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A29CC2507BC0F00530C2C /* BleDoor.m */; };
+		225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8B72508CFC0005E71A2 /* DoorManager.m */; };
+		225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BA2508D579005E71A2 /* NSData+FastHex.m */; };
+		225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */; };
 		22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEF925075A2100A60ACF /* Interface.storyboard */; };
 		22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEFC25075A2200A60ACF /* Assets.xcassets */; };
@@ -64,6 +67,12 @@
 /* Begin PBXFileReference section */
 		223A29CB2507BC0F00530C2C /* BleDoor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleDoor.h; sourceTree = "<group>"; };
 		223A29CC2507BC0F00530C2C /* BleDoor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleDoor.m; sourceTree = "<group>"; };
+		225BA8B62508CFC0005E71A2 /* DoorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorManager.h; sourceTree = "<group>"; };
+		225BA8B72508CFC0005E71A2 /* DoorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorManager.m; sourceTree = "<group>"; };
+		225BA8B92508D579005E71A2 /* NSData+FastHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+FastHex.h"; sourceTree = "<group>"; };
+		225BA8BA2508D579005E71A2 /* NSData+FastHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+FastHex.m"; sourceTree = "<group>"; };
+		225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
+		225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
 		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -127,6 +136,10 @@
 		22DBEF0725075A2200A60ACF /* sesame WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */,
+				225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */,
+				225BA8B92508D579005E71A2 /* NSData+FastHex.h */,
+				225BA8BA2508D579005E71A2 /* NSData+FastHex.m */,
 				22DBEF0825075A2200A60ACF /* InterfaceController.h */,
 				22DBEF0925075A2200A60ACF /* InterfaceController.m */,
 				22DBEF0B25075A2200A60ACF /* ExtensionDelegate.h */,
@@ -138,6 +151,8 @@
 				22DBEF1425075A2200A60ACF /* PushNotificationPayload.apns */,
 				223A29CB2507BC0F00530C2C /* BleDoor.h */,
 				223A29CC2507BC0F00530C2C /* BleDoor.m */,
+				225BA8B62508CFC0005E71A2 /* DoorManager.h */,
+				225BA8B72508CFC0005E71A2 /* DoorManager.m */,
 			);
 			path = "sesame WatchKit Extension";
 			sourceTree = "<group>";
@@ -276,9 +291,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */,
 				22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */,
 				223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */,
+				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
+				225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */,
 				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

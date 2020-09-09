@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (retain, nonatomic) NSString *macAddress;
 
++ (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData;
+
+- (id) initWithMacAddress: (NSString *) _macAddress;
+
 @end
 
 NS_ASSUME_NONNULL_END

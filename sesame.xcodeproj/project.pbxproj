@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2226F8432508F1040065F775 /* LopeDoorV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226F8422508F1040065F775 /* LopeDoorV2.m */; };
 		223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A29CC2507BC0F00530C2C /* BleDoor.m */; };
 		225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8B72508CFC0005E71A2 /* DoorManager.m */; };
 		225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BA2508D579005E71A2 /* NSData+FastHex.m */; };
@@ -65,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2226F8412508F1040065F775 /* LopeDoorV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LopeDoorV2.h; sourceTree = "<group>"; };
+		2226F8422508F1040065F775 /* LopeDoorV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LopeDoorV2.m; sourceTree = "<group>"; };
 		223A29CB2507BC0F00530C2C /* BleDoor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleDoor.h; sourceTree = "<group>"; };
 		223A29CC2507BC0F00530C2C /* BleDoor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleDoor.m; sourceTree = "<group>"; };
 		225BA8B62508CFC0005E71A2 /* DoorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorManager.h; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				223A29CC2507BC0F00530C2C /* BleDoor.m */,
 				225BA8B62508CFC0005E71A2 /* DoorManager.h */,
 				225BA8B72508CFC0005E71A2 /* DoorManager.m */,
+				2226F8412508F1040065F775 /* LopeDoorV2.h */,
+				2226F8422508F1040065F775 /* LopeDoorV2.m */,
 			);
 			path = "sesame WatchKit Extension";
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */,
 				22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */,
 				223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */,
+				2226F8432508F1040065F775 /* LopeDoorV2.m in Sources */,
 				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
 				225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */,

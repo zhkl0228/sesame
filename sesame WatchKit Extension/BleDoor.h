@@ -13,11 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BleDoor : NSObject <CBPeripheralDelegate>
 
-@property (retain, nonatomic) NSString *macAddress;
-
 + (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData;
 
-- (id) initWithMacAddress: (NSString *) _macAddress;
+- (void)unlock: (CBPeripheral *)peripheral withCharacteristic: (CBCharacteristic *) characteristic;
 
 @end
 

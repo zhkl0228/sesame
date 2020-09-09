@@ -52,8 +52,7 @@
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central
-didFailToConnectPeripheral:(CBPeripheral *)peripheral
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     NSLog(@"didFailToConnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
     
@@ -64,8 +63,7 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central
-didDisconnectPeripheral:(CBPeripheral *)peripheral
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     NSLog(@"didDisconnectPeripheral central=%@, peripheral=%@, error=%@", central, peripheral, error);
     
@@ -75,8 +73,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central
-  didConnectPeripheral:(CBPeripheral *)peripheral {
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     NSLog(@"didConnectPeripheral peripheral=%@", peripheral);
     BleDoor *door = [self.doorDict valueForKey:[[peripheral identifier]UUIDString]];
     if(door) {

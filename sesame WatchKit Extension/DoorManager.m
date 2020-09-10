@@ -15,7 +15,9 @@
 + (DoorManager *)sharedManager {
     static dispatch_once_t once;
     static id instance;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    dispatch_once(&once, ^{
+        instance = [[self alloc] init];
+    });
     return instance;
 }
 

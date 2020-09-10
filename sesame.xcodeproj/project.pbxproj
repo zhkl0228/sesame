@@ -76,6 +76,7 @@
 		225BA8BA2508D579005E71A2 /* NSData+FastHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+FastHex.m"; sourceTree = "<group>"; };
 		225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
+		228FF72C2509ED640011D8C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		22DBEF222507641200A60ACF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				228FF72C2509ED640011D8C5 /* AVFoundation.framework */,
 				22DBEF232507641200A60ACF /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;

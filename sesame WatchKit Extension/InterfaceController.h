@@ -11,4 +11,7 @@
 
 @interface InterfaceController : WKInterfaceController
 
++ (InterfaceController *)sharedController;
+- (void)setGuardName: (NSString *) guardName;
+
 @end

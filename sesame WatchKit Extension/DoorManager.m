@@ -6,7 +6,9 @@
 //  Copyright © 2020 廖正凯. All rights reserved.
 //
 
+#import <WatchKit/WatchKit.h>
 #import "DoorManager.h"
+#import "InterfaceController.h"
 
 @implementation DoorManager
 
@@ -28,10 +30,16 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     NSLog(@"centralManagerDidUpdateState central=%@", central);
+    
+    CBManagerState state = [self.centralManager state];
+    WKExtension *extension = [WKExtension sharedExtension];
+    if(state == CBManagerStatePoweredOn && ![self.centralManager isScanning] && [extension applicationState] == WKApplicationStateActive) {
+        [self startScan];
+    }
 }
 
 - (void)applicationDidEnterBackground {
-    NSLog(@"applicationDidEnterBackground discoveredPeripheral=%@", self.discoveredPeripheral);
+    NSLog(@"applicationDidEnterBackground discoveredPeripheral=%@, isApplicationRunningInDock=%d", self.discoveredPeripheral, [[WKExtension sharedExtension] isApplicationRunningInDock]);
     
     if(self.discoveredPeripheral) {
         [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
@@ -42,7 +50,9 @@
 - (void)startScan {
     CBManagerState state = [self.centralManager state];
     if(state == CBManagerStatePoweredOn && ![self.centralManager isScanning]) {
-         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+        [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+        InterfaceController *controller = [InterfaceController sharedController];
+        [controller setGuardName:nil];
     }
 }
 

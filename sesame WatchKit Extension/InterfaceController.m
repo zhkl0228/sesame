@@ -11,25 +11,45 @@
 
 @interface InterfaceController ()
 
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel* guardLabel;
+
 @end
 
 
 @implementation InterfaceController
 
+static InterfaceController *instance;
+
++ (InterfaceController *)sharedController {
+    return instance;
+}
+
+- (void)setGuardName: (NSString *) guardName {
+    if(guardName) {
+        [[self guardLabel] setText:guardName];
+    } else {
+        [[self guardLabel] setText:@"芝麻开门"];
+    }
+}
+
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
 
-    // Configure interface objects here.
+    instance = self;
+    NSLog(@"awakeWithContext context=%@, guardLabel=%@", context, self.guardLabel);
+    [self setGuardName:nil];
 }
 
 - (void)willActivate {
-    // This method is called when watch view controller is about to be visible to user
     [super willActivate];
+
+    NSLog(@"willActivate guardLabel=%@", self.guardLabel);
 }
 
 - (void)didDeactivate {
-    // This method is called when watch view controller is no longer visible
     [super didDeactivate];
+
+    NSLog(@"didDeactivate guardLabel=%@", self.guardLabel);
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <WatchKit/WatchKit.h>
 #import "MF_Base64Additions.h"
 #import "LopeDoorV2.h"
+#import "InterfaceController.h"
 
 @implementation LopeDoorV2
 
@@ -42,6 +43,9 @@
     }
     
     if(guard) {
+        InterfaceController *controller = [InterfaceController sharedController];
+        [controller setGuardName:[guard objectForKey:@"guardName"]];
+        
         NSString *secretKey = [guard objectForKey:@"secretKey"];
         NSData *pwd = [NSData dataWithBase64String:secretKey]; // length is 16
         

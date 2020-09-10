@@ -10,8 +10,35 @@
 #import "MF_Base64Additions.h"
 #import "LopeDoorV2.h"
 #import "InterfaceController.h"
+#import "BleKey.h"
+#import "EnjoyLinkKeys.h"
 
 @implementation LopeDoorV2
+
++ (LopeDoorV2 *)door: (unsigned short)manufacturerId manufacturerData: (NSData *)manufacturerData {
+    if(manufacturerId == 0x4f4c) {
+        unsigned char dev_type = 0;
+        unsigned char fw_type = 0;
+        int dev_id = 0;
+        char mac[6];
+        [manufacturerData getBytes:&dev_type range:NSMakeRange(0, 1)];
+        [manufacturerData getBytes:&fw_type range:NSMakeRange(1, 1)];
+        [manufacturerData getBytes:&dev_id range:NSMakeRange(2, 4)];
+        [manufacturerData getBytes:mac range:NSMakeRange(6, sizeof(mac))];
+        
+        dev_id = ntohl(dev_id);
+        char buf[20];
+        int pos = 0;
+        for(int i = 0; i < 6; i++) {
+            pos += sprintf(&buf[pos], "%02X:", mac[i] & 0xff);
+        }
+        buf[pos-1] = 0;
+        
+        NSString *macAddress = [NSString stringWithFormat:@"%s", buf];
+        return [[LopeDoorV2 alloc] initWithMacAddress: macAddress];
+    }
+    return nil;
+}
 
 - (LopeDoorV2 *) initWithMacAddress: (NSString *) _macAddress {
     if((self = [super init])) {
@@ -21,32 +48,12 @@
 }
 
 - (void)unlock: (CBPeripheral *)peripheral withCharacteristic: (CBCharacteristic *) characteristic {
-//    NSDictionary *keys = [[NSDictionary alloc]initWithObjectsAndKeys:
-//    @"uQ0uIglyUOaqXjv//F+now", @"B0:7E:11:F4:D9:D1",
-//    @"i+pzrxp8LtsIKAJnphOupw", @"30:45:11:6B:9E:80",
-//    @"nxzKBFmHUq+FJ9qm3kBE+A", @"40:BD:32:AF:A5:FD",
-//    @"Il3ITyDWG4gL4axaXtN9VA", @"50:F1:4A:F8:79:3A",
-//    @"C2NmSxiMnKxuXN9jvV1c0w", @"B0:7E:11:F4:F3:87",
-//    @"N86d6EQUg2ZYCSx2YnISDw", @"40:BD:32:AF:AC:1D", nil];
-    
-    NSString *json = @"{\"encrypt\":true,\"code\":10000,\"desc\":\"请求执行成功！\",\"rts\":\"0000000000\",\"result\":{\"keys\":[{\"blueToothDeviceVo\":{\"deviceId\":15785,\"version\":\"32\",\"secretKey\":\"uQ0uIglyUOaqXjv//F+now\",\"macAddress\":\"B0:7E:11:F4:D9:D1\",\"guardId\":12148,\"guardName\":\"9栋负一正门\",\"code\":\"20190524173555\",\"supplierType\":\"1\",\"orderNum\":0},\"keyType\":\"01\"},{\"blueToothDeviceVo\":{\"deviceId\":10860,\"version\":\"32\",\"secretKey\":\"i+pzrxp8LtsIKAJnphOupw\",\"macAddress\":\"30:45:11:6B:9E:80\",\"guardId\":8471,\"guardName\":\"9栋大堂\",\"code\":\"20181127160712\",\"supplierType\":\"1\",\"orderNum\":1},\"keyType\":\"01\"},{\"blueToothDeviceVo\":{\"deviceId\":8156,\"version\":\"32\",\"secretKey\":\"nxzKBFmHUq+FJ9qm3kBE+A\",\"macAddress\":\"40:BD:32:AF:A5:FD\",\"guardId\":6765,\"guardName\":\"北门\",\"code\":\"20181017164904\",\"supplierType\":\"1\",\"orderNum\":3},\"keyType\":\"01\"},{\"blueToothDeviceVo\":{\"deviceId\":8157,\"version\":\"32\",\"secretKey\":\"Il3ITyDWG4gL4axaXtN9VA\",\"macAddress\":\"50:F1:4A:F8:79:3A\",\"guardId\":6764,\"guardName\":\"西门\",\"code\":\"20181017172830\",\"supplierType\":\"1\",\"orderNum\":4},\"keyType\":\"01\"},{\"blueToothDeviceVo\":{\"deviceId\":15786,\"version\":\"32\",\"secretKey\":\"C2NmSxiMnKxuXN9jvV1c0w\",\"macAddress\":\"B0:7E:11:F4:F3:87\",\"guardId\":12149,\"guardName\":\"9栋负二正门\",\"code\":\"20190524174920\",\"supplierType\":\"1\",\"orderNum\":5},\"keyType\":\"01\"},{\"blueToothDeviceVo\":{\"deviceId\":8158,\"version\":\"32\",\"secretKey\":\"N86d6EQUg2ZYCSx2YnISDw\",\"macAddress\":\"40:BD:32:AF:AC:1D\",\"guardId\":6763,\"guardName\":\"东门单车行道\",\"code\":\"20181017180546\",\"supplierType\":\"1\",\"orderNum\":5},\"keyType\":\"01\"}],\"url\":\"semtec-ss1\"}}";
-    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    NSDictionary *result = [response objectForKey:@"result"];
-    NSDictionary *guard = nil;
-    for(NSDictionary *key in [result objectForKey:@"keys"]) {
-        NSDictionary *vo = [key objectForKey:@"blueToothDeviceVo"];
-        NSString *macAddress = [vo objectForKey:@"macAddress"];
-        if([self.macAddress isEqualToString:macAddress]) {
-            guard = vo;
-            break;
-        }
-    }
-    
-    if(guard) {
+    BleKey *key = [[EnjoyLinkKeys sharedKeys] findKey:self.macAddress];
+    if(key) {
         InterfaceController *controller = [InterfaceController sharedController];
-        [controller setGuardName:[guard objectForKey:@"guardName"]];
+        [controller setGuardName:[key name]];
         
-        NSString *secretKey = [guard objectForKey:@"secretKey"];
+        NSString *secretKey = [key password];
         NSData *pwd = [NSData dataWithBase64String:secretKey]; // length is 16
         
         int8_t command = -127;
@@ -63,7 +70,7 @@
         data[19] = checksum;
         
         NSData *block = [NSData dataWithBytes:data length:20];
-        NSLog(@"unlock_door peripheral=%@, characteristic=%@, guard=%@, pwd=%@, block=%@", peripheral, characteristic, guard, pwd, block);
+        NSLog(@"unlock_door peripheral=%@, characteristic=%@, pwd=%@, block=%@", peripheral, characteristic, pwd, block);
         [peripheral writeValue:block forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
         [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeSuccess];
     } else {

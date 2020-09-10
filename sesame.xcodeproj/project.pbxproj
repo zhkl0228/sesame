@@ -12,6 +12,8 @@
 		225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8B72508CFC0005E71A2 /* DoorManager.m */; };
 		225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BA2508D579005E71A2 /* NSData+FastHex.m */; };
 		225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */; };
+		229DDF6A250A9D48009599A3 /* EnjoyLinkKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */; };
+		229DDF6D250A9E17009599A3 /* BleKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF6C250A9E17009599A3 /* BleKey.m */; };
 		22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEF925075A2100A60ACF /* Interface.storyboard */; };
 		22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEFC25075A2200A60ACF /* Assets.xcassets */; };
@@ -77,6 +79,10 @@
 		225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
 		228FF72C2509ED640011D8C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		229DDF68250A9D48009599A3 /* EnjoyLinkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnjoyLinkKeys.h; sourceTree = "<group>"; };
+		229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnjoyLinkKeys.m; sourceTree = "<group>"; };
+		229DDF6B250A9E17009599A3 /* BleKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleKey.h; sourceTree = "<group>"; };
+		229DDF6C250A9E17009599A3 /* BleKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleKey.m; sourceTree = "<group>"; };
 		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -159,6 +165,10 @@
 				225BA8B72508CFC0005E71A2 /* DoorManager.m */,
 				2226F8412508F1040065F775 /* LopeDoorV2.h */,
 				2226F8422508F1040065F775 /* LopeDoorV2.m */,
+				229DDF68250A9D48009599A3 /* EnjoyLinkKeys.h */,
+				229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */,
+				229DDF6B250A9E17009599A3 /* BleKey.h */,
+				229DDF6C250A9E17009599A3 /* BleKey.m */,
 			);
 			path = "sesame WatchKit Extension";
 			sourceTree = "<group>";
@@ -299,9 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */,
+				229DDF6A250A9D48009599A3 /* EnjoyLinkKeys.m in Sources */,
 				22DBEF0D25075A2200A60ACF /* ExtensionDelegate.m in Sources */,
 				223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */,
 				2226F8432508F1040065F775 /* LopeDoorV2.m in Sources */,
+				229DDF6D250A9E17009599A3 /* BleKey.m in Sources */,
 				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
 				225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */,

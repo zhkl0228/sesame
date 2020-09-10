@@ -8,6 +8,7 @@
 
 #import "ExtensionDelegate.h"
 #import "DoorManager.h"
+#import "EnjoyLinkKeys.h"
 
 @implementation ExtensionDelegate
 

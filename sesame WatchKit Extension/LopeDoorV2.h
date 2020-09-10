@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (retain, nonatomic) NSString *macAddress;
 
-- (id) initWithMacAddress: (NSString *) _macAddress;
++ (LopeDoorV2 *)door: (unsigned short)manufacturerId manufacturerData: (NSData *)manufacturerData;
 
 @end
 

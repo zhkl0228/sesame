@@ -27,7 +27,9 @@ static InterfaceController *instance;
     if(guardName) {
         [[self guardLabel] setText:guardName];
     } else {
-        [[self guardLabel] setText:@"芝麻开门"];
+        NSBundle *bundle = [NSBundle mainBundle];
+        NSString *displayName = [[bundle infoDictionary] valueForKey:@"CFBundleDisplayName"];
+        [[self guardLabel] setText:displayName];
     }
 }
 

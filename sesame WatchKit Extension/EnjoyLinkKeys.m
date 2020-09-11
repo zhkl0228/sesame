@@ -50,13 +50,15 @@
             for(NSDictionary *key in [result objectForKey:@"keys"]) {
                 NSDictionary *vo = [key objectForKey:@"blueToothDeviceVo"];
                 NSString *macAddress = [vo objectForKey:@"macAddress"];
-                NSString *name = [vo objectForKey:@"guardName"];
-                NSString *password = [vo objectForKey:@"secretKey"];
-                BleKey *key = [[BleKey alloc] init:password name:name];
+                if([self.keys valueForKey:macAddress]) {
+                    continue;
+                }
+                NSString *guardName = [vo objectForKey:@"guardName"];
+                NSString *secretKey = [vo objectForKey:@"secretKey"];
+                BleKey *key = [[BleKey alloc] init:secretKey name:guardName];
                 [self.keys setValue:key forKey:macAddress];
             }
         }
-        NSLog(@"keys=%@", self.keys);
     }
     return self;
 }

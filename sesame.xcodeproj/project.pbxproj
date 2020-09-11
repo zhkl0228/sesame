@@ -10,7 +10,6 @@
 		2226F8432508F1040065F775 /* LopeDoorV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226F8422508F1040065F775 /* LopeDoorV2.m */; };
 		223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A29CC2507BC0F00530C2C /* BleDoor.m */; };
 		225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8B72508CFC0005E71A2 /* DoorManager.m */; };
-		225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BA2508D579005E71A2 /* NSData+FastHex.m */; };
 		225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */; };
 		229DDF6A250A9D48009599A3 /* EnjoyLinkKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */; };
 		229DDF6D250A9E17009599A3 /* BleKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF6C250A9E17009599A3 /* BleKey.m */; };
@@ -74,8 +73,6 @@
 		223A29CC2507BC0F00530C2C /* BleDoor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleDoor.m; sourceTree = "<group>"; };
 		225BA8B62508CFC0005E71A2 /* DoorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorManager.h; sourceTree = "<group>"; };
 		225BA8B72508CFC0005E71A2 /* DoorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorManager.m; sourceTree = "<group>"; };
-		225BA8B92508D579005E71A2 /* NSData+FastHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+FastHex.h"; sourceTree = "<group>"; };
-		225BA8BA2508D579005E71A2 /* NSData+FastHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+FastHex.m"; sourceTree = "<group>"; };
 		225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
 		228FF72C2509ED640011D8C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -148,8 +145,6 @@
 			children = (
 				225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */,
 				225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */,
-				225BA8B92508D579005E71A2 /* NSData+FastHex.h */,
-				225BA8BA2508D579005E71A2 /* NSData+FastHex.m */,
 				22DBEF0825075A2200A60ACF /* InterfaceController.h */,
 				22DBEF0925075A2200A60ACF /* InterfaceController.m */,
 				22DBEF0B25075A2200A60ACF /* ExtensionDelegate.h */,
@@ -316,7 +311,6 @@
 				229DDF6D250A9E17009599A3 /* BleKey.m in Sources */,
 				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
-				225BA8BB2508D579005E71A2 /* NSData+FastHex.m in Sources */,
 				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

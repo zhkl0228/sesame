@@ -51,6 +51,7 @@
 
 - (void)startScan {
     CBManagerState state = [self.centralManager state];
+    NSLog(@"startScan discoveredPeripheral=%@, state=%ld", self.discoveredPeripheral, state);
     if(state == CBManagerStatePoweredOn && ![self.centralManager isScanning]) {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
         InterfaceController *controller = [InterfaceController sharedController];

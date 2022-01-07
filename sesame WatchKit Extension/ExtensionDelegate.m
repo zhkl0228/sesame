@@ -17,22 +17,44 @@
     NSLog(@"applicationDidFinishLaunching manager=%@", manager);
 }
 
-- (void)applicationDidBecomeActive {
-    DoorManager *manager = [DoorManager sharedManager];
-    NSLog(@"applicationDidBecomeActive manager=%@", manager);
-    [manager startScan];
-}
-
-- (void)applicationWillResignActive {
-    NSLog(@"applicationWillResignActive");
+- (void)applicationWillEnterForeground {
+    WKExtension *extension = [WKExtension sharedExtension];
+    BOOL isApplicationRunningInDock = [extension isApplicationRunningInDock];
+    NSLog(@"applicationWillEnterForeground isApplicationRunningInDock=%d", isApplicationRunningInDock);
     
     DoorManager *manager = [DoorManager sharedManager];
-    [manager stopScan];
+    [manager startScan];
 }
 
 - (void)applicationDidEnterBackground {
     DoorManager *manager = [DoorManager sharedManager];
-    [manager applicationDidEnterBackground];
+    [manager cancelPeripheralConnection];
+//    NSDate *preferredDate = [NSDate dateWithTimeIntervalSinceNow: 10];
+//    NSLog(@"applicationDidEnterBackground preferredDate=%@", preferredDate);
+//    WKExtension *extension = [WKExtension sharedExtension];
+//    [extension scheduleBackgroundRefreshWithPreferredDate:preferredDate userInfo:nil scheduledCompletion:^(NSError * _Nullable error) {
+//        NSLog(@"scheduleBackgroundRefreshWithPreferredDate error=%@", error);
+//    }];
 }
+
+//- (void)handleBackgroundTasks:(NSSet<WKRefreshBackgroundTask *> *)backgroundTasks {
+//    NSLog(@"handleBackgroundTasks backgroundTasks=%@", backgroundTasks);
+//
+//    for (WKRefreshBackgroundTask * task in backgroundTasks) {
+//        if ([task isKindOfClass:[WKApplicationRefreshBackgroundTask class]]) {
+//            WKApplicationRefreshBackgroundTask *backgroundTask = (WKApplicationRefreshBackgroundTask*)task;
+//            backgroundTask.expirationHandler = ^{
+//                NSLog(@"expirationHandler");
+//                DoorManager *manager = [DoorManager sharedManager];
+//                [manager cancelPeripheralConnection];
+//            };
+//        } else if ([task isKindOfClass:[WKSnapshotRefreshBackgroundTask class]]) {
+//            WKSnapshotRefreshBackgroundTask *snapshotTask = (WKSnapshotRefreshBackgroundTask*)task;
+//            [snapshotTask setTaskCompletedWithDefaultStateRestored:YES estimatedSnapshotExpiration:[NSDate distantFuture] userInfo:nil];
+//        } else {
+//            [task setTaskCompletedWithSnapshot: NO];
+//        }
+//    }
+//}
 
 @end

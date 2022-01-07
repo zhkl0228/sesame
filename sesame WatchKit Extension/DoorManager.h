@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) CBPeripheral *discoveredPeripheral;
 
 + (DoorManager *)sharedManager;
-- (void)applicationDidEnterBackground;
+- (void)cancelPeripheralConnection;
 - (void)startScan;
 - (void)stopScan;
 

@@ -67,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		221D3112271D4B8D0042E008 /* sesame WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "sesame WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		2226F8412508F1040065F775 /* LopeDoorV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LopeDoorV2.h; sourceTree = "<group>"; };
 		2226F8422508F1040065F775 /* LopeDoorV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LopeDoorV2.m; sourceTree = "<group>"; };
 		223A29CB2507BC0F00530C2C /* BleDoor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleDoor.h; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		22DBEF0725075A2200A60ACF /* sesame WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				221D3112271D4B8D0042E008 /* sesame WatchKit Extension.entitlements */,
 				225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */,
 				225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */,
 				22DBEF0825075A2200A60ACF /* InterfaceController.h */,
@@ -454,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "sesame WatchKit Extension/sesame WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SJLXVCAHF;
 				INFOPLIST_FILE = "sesame WatchKit Extension/Info.plist";
@@ -467,7 +470,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -475,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "sesame WatchKit Extension/sesame WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SJLXVCAHF;
 				INFOPLIST_FILE = "sesame WatchKit Extension/Info.plist";
@@ -488,7 +492,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -505,7 +509,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -522,7 +526,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};

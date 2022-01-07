@@ -40,19 +40,21 @@
     }
 }
 
-- (void)applicationDidEnterBackground {
-    NSLog(@"applicationDidEnterBackground discoveredPeripheral=%@, isApplicationRunningInDock=%d", self.discoveredPeripheral, [[WKExtension sharedExtension] isApplicationRunningInDock]);
+- (void)cancelPeripheralConnection {
+    NSLog(@"cancelPeripheralConnection discoveredPeripheral=%@", self.discoveredPeripheral);
     
     if(self.discoveredPeripheral) {
         [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
         self.discoveredPeripheral = nil;
     }
+    [self stopScan];
 }
 
 - (void)startScan {
     CBManagerState state = [self.centralManager state];
-    NSLog(@"startScan discoveredPeripheral=%@, state=%ld", self.discoveredPeripheral, state);
-    if(state == CBManagerStatePoweredOn && ![self.centralManager isScanning]) {
+    BOOL isScanning = [self.centralManager isScanning];
+    NSLog(@"startScan discoveredPeripheral=%@, isScanning=%d", self.discoveredPeripheral, isScanning);
+    if(state == CBManagerStatePoweredOn && !isScanning) {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
         InterfaceController *controller = [InterfaceController sharedController];
         [controller setGuardName:nil];

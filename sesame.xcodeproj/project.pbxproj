@@ -13,6 +13,7 @@
 		225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */; };
 		229DDF6A250A9D48009599A3 /* EnjoyLinkKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */; };
 		229DDF6D250A9E17009599A3 /* BleKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF6C250A9E17009599A3 /* BleKey.m */; };
+		22DBE91227887FF600D3371C /* MiDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBE91127887FF600D3371C /* MiDoor.m */; };
 		22DBEEF525075A2000A60ACF /* sesame WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22DBEEFB25075A2100A60ACF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEF925075A2100A60ACF /* Interface.storyboard */; };
 		22DBEEFD25075A2200A60ACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DBEEFC25075A2200A60ACF /* Assets.xcassets */; };
@@ -81,6 +82,8 @@
 		229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnjoyLinkKeys.m; sourceTree = "<group>"; };
 		229DDF6B250A9E17009599A3 /* BleKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleKey.h; sourceTree = "<group>"; };
 		229DDF6C250A9E17009599A3 /* BleKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleKey.m; sourceTree = "<group>"; };
+		22DBE91027887FF600D3371C /* MiDoor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiDoor.h; sourceTree = "<group>"; };
+		22DBE91127887FF600D3371C /* MiDoor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiDoor.m; sourceTree = "<group>"; };
 		22DBEEF025075A2000A60ACF /* sesame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sesame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEF425075A2000A60ACF /* sesame WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sesame WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBEEFA25075A2100A60ACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */,
 				229DDF6B250A9E17009599A3 /* BleKey.h */,
 				229DDF6C250A9E17009599A3 /* BleKey.m */,
+				22DBE91027887FF600D3371C /* MiDoor.h */,
+				22DBE91127887FF600D3371C /* MiDoor.m */,
 			);
 			path = "sesame WatchKit Extension";
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
 				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
+				22DBE91227887FF600D3371C /* MiDoor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

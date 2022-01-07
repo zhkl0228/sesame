@@ -26,6 +26,8 @@
             return door;
         }
     }
+    NSDictionary *serviceData = [advertisementData valueForKey: CBAdvertisementDataServiceDataKey];
+    NSLog(@"discoverByAdvertisementData serviceData=%@", serviceData);
     return nil;
 }
 

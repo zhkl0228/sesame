@@ -18,7 +18,9 @@ typedef enum _AuthState {
     ReceivePublicKey,
     WaitSendAuth,
     SentAuth,
-    WaitAuthStatus
+    WaitAuthStatus,
+    TryUnlock,
+    UnlockFinish
     
 } AuthState;
 
@@ -35,6 +37,7 @@ typedef enum _AuthState {
 @property (retain, nonatomic, nullable) NSData *publicKey;
 @property (retain, nonatomic, nullable) NSData *privateKey;
 @property (retain, nonatomic, nullable) NSMutableData *peerPublicKey;
+@property (retain, nonatomic, nullable) NSData *sessionKey;
 @property (assign) AuthState authState;
 
 + (MiDoor *)door: (unsigned short)productId;

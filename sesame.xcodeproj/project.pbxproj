@@ -11,6 +11,7 @@
 		223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A29CC2507BC0F00530C2C /* BleDoor.m */; };
 		225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8B72508CFC0005E71A2 /* DoorManager.m */; };
 		225BA8BE2508D7BB005E71A2 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */; };
+		228A2E6D2788A8A700E5446C /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 228A2E6C2788A8A700E5446C /* NSData+Hex.m */; };
 		229DDF6A250A9D48009599A3 /* EnjoyLinkKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */; };
 		229DDF6D250A9E17009599A3 /* BleKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 229DDF6C250A9E17009599A3 /* BleKey.m */; };
 		22DBE91227887FF600D3371C /* MiDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DBE91127887FF600D3371C /* MiDoor.m */; };
@@ -77,6 +78,8 @@
 		225BA8B72508CFC0005E71A2 /* DoorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorManager.m; sourceTree = "<group>"; };
 		225BA8BC2508D7BB005E71A2 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		225BA8BD2508D7BB005E71A2 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
+		228A2E6B2788A8A700E5446C /* NSData+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Hex.h"; sourceTree = "<group>"; };
+		228A2E6C2788A8A700E5446C /* NSData+Hex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hex.m"; sourceTree = "<group>"; };
 		228FF72C2509ED640011D8C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		229DDF68250A9D48009599A3 /* EnjoyLinkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnjoyLinkKeys.h; sourceTree = "<group>"; };
 		229DDF69250A9D48009599A3 /* EnjoyLinkKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnjoyLinkKeys.m; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				229DDF6C250A9E17009599A3 /* BleKey.m */,
 				22DBE91027887FF600D3371C /* MiDoor.h */,
 				22DBE91127887FF600D3371C /* MiDoor.m */,
+				228A2E6B2788A8A700E5446C /* NSData+Hex.h */,
+				228A2E6C2788A8A700E5446C /* NSData+Hex.m */,
 			);
 			path = "sesame WatchKit Extension";
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				223A29CD2507BC0F00530C2C /* BleDoor.m in Sources */,
 				2226F8432508F1040065F775 /* LopeDoorV2.m in Sources */,
 				229DDF6D250A9E17009599A3 /* BleKey.m in Sources */,
+				228A2E6D2788A8A700E5446C /* NSData+Hex.m in Sources */,
 				225BA8B82508CFC0005E71A2 /* DoorManager.m in Sources */,
 				22DBEF0A25075A2200A60ACF /* InterfaceController.m in Sources */,
 				22DBEF1025075A2200A60ACF /* NotificationController.m in Sources */,
@@ -400,9 +406,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(HOME)/git/openssl-apple/include";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/git/openssl-apple/bin/WatchOS8.0/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lssl",
+					"-lcrypto",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -451,8 +463,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(HOME)/git/openssl-apple/include";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/git/openssl-apple/bin/WatchOS8.0/lib";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-lssl",
+					"-lcrypto",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

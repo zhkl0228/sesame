@@ -8,6 +8,7 @@
 
 #import "BleDoor.h"
 #import "LopeDoorV2.h"
+#import "MiDoor.h"
 
 @implementation BleDoor
 
@@ -27,7 +28,18 @@
         }
     }
     NSDictionary *serviceData = [advertisementData valueForKey: CBAdvertisementDataServiceDataKey];
-    NSLog(@"discoverByAdvertisementData serviceData=%@", serviceData);
+    if(serviceData) {
+        NSData *data = [serviceData objectForKey: [MiDoor MI_SERVICE_UUID]];
+        if(data) {
+            struct mi_service_data mi_data;
+            [data getBytes:&mi_data length:sizeof(struct mi_service_data)];
+            NSLog(@"discoverByAdvertisementData serviceData=%@, data=%@, product_id=0x%x", serviceData, data, mi_data.product_id);
+            MiDoor *door = [MiDoor door: mi_data.product_id];
+            if(door) {
+                return door;
+            }
+        }
+    }
     return nil;
 }
 

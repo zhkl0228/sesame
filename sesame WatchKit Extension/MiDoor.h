@@ -39,6 +39,7 @@ typedef enum _AuthState {
 @property (retain, nonatomic, nullable) NSMutableData *peerPublicKey;
 @property (retain, nonatomic, nullable) NSData *sessionKey;
 @property (assign) AuthState authState;
+@property (retain, nonatomic, nullable) NSDate *lastUnlockDate;
 
 + (MiDoor *)door: (unsigned short)productId;
 

@@ -64,7 +64,7 @@ struct batch_packet {
 
 + (MiDoor *)door: (unsigned short)productId {
     if(productId == 0x8cf) {
-        return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"6c995fc25f0444dbb21d603be65dc2f59d4b53327b2e299d03cecca43fe73614"] name : @"保险柜"];
+//        return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"6c995fc25f0444dbb21d603be65dc2f59d4b53327b2e299d03cecca43fe73614"] name : @"保险柜"];
     }
     if(productId == 0x492) {
         return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"f1bfc155c355d27e49ec4dae2f513276ceb4508a75cf9217d427b2a1f3b964d4"] name : @"小米智能锁"];
@@ -88,6 +88,18 @@ struct batch_packet {
     if(error == nil && [self.unlockCharacteristic isEqual: characteristic]) {
         [peripheral readValueForCharacteristic: self.notifyCharacteristic];
     }
+}
+
+- (void) tryUnlock:(CBPeripheral *)peripheral {
+    if(self.lastUnlockDate && [[NSDate now] timeIntervalSinceDate: self.lastUnlockDate] < 15) {
+        NSLog(@"tryUnlock waiting door=%@", self);
+        NSString *tip = [NSString stringWithFormat: @"%@已开锁", self.name];
+        InterfaceController *controller = [InterfaceController sharedController];
+        [controller setGuardName: tip];
+        return;
+    }
+    
+    [super tryUnlock: peripheral];
 }
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -116,6 +128,7 @@ struct batch_packet {
             int len = decrypt_aes_ccm((unsigned char *) [cipher bytes], (int) [cipher length], (unsigned char *) [tag bytes], (unsigned char *) [key bytes], (unsigned char *) [nonce bytes], plaintext);
             NSLog(@"Test unlock cipher=%@, tag=%@, nonce=%@, len=%d, plaintext=%@", [cipher toHexString], [tag toHexString], [nonce toHexString], len, [[NSData dataWithBytes: plaintext length: 1] toHexString]);
             if(plaintext[0] == 0) {
+                self.lastUnlockDate = [NSDate now];
                 self.authState = UnlockFinish;
                 [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeSuccess];
             }
@@ -323,28 +336,30 @@ struct batch_packet {
         NSData *step3_data = [NSData dataWithBytes: &security_chip_login_step3_data length:4];
         [peripheral writeValue: step3_data forCharacteristic: self.authenticationCharacteristic type: CBCharacteristicWriteWithoutResponse];
         
-        EC_KEY *ec_key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-        EC_KEY_set_asn1_flag(ec_key, OPENSSL_EC_NAMED_CURVE);
-        EC_KEY_generate_key(ec_key);
-        
-        unsigned char buf[1024];
-        unsigned char *pp;
-        size_t len;
-        
-        pp = buf;
-        len = i2d_ECPrivateKey(ec_key, &pp);
-        NSData *private_key = [NSData dataWithBytes: buf length: len];
-        NSLog(@"generateKeyPair privateKey=%@, len=%zu", [private_key toHexString], len);
-        
-        pp = buf;
-        len = i2o_ECPublicKey(ec_key, &pp);
-        NSData *public_key = [NSData dataWithBytes: buf length: len];
-        NSLog(@"generateKeyPair publicKey=%@, len=%zu", [public_key toHexString], len);
-        
-        EC_KEY_free(ec_key);
-        
-        self.publicKey = public_key;
-        self.privateKey = private_key;
+        if(self.publicKey == nil || self.privateKey == nil) {
+            EC_KEY *ec_key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+            EC_KEY_set_asn1_flag(ec_key, OPENSSL_EC_NAMED_CURVE);
+            EC_KEY_generate_key(ec_key);
+            
+            unsigned char buf[1024];
+            unsigned char *pp;
+            size_t len;
+            
+            pp = buf;
+            len = i2d_ECPrivateKey(ec_key, &pp);
+            NSData *private_key = [NSData dataWithBytes: buf length: len];
+            NSLog(@"generateKeyPair privateKey=%@, len=%zu", [private_key toHexString], len);
+            
+            pp = buf;
+            len = i2o_ECPublicKey(ec_key, &pp);
+            NSData *public_key = [NSData dataWithBytes: buf length: len];
+            NSLog(@"generateKeyPair publicKey=%@, len=%zu", [public_key toHexString], len);
+            
+            EC_KEY_free(ec_key);
+            
+            self.publicKey = public_key;
+            self.privateKey = private_key;
+        }
         
         self.authState = WaitSendPublicKey;
         flow.header = 0;
@@ -386,7 +401,7 @@ struct batch_packet {
         const CBUUID *LOCK_NOTIFY_UUID = [CBUUID UUIDWithString: @"00001002-0065-6c62-2e74-6f696d2e696d"];
         return [NSArray arrayWithObjects: UNLOCK_UUID, LOCK_NOTIFY_UUID, nil];
     }
-    return nil;
+    return [super characteristicUUIDs: service];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(nullable NSError *)error {
@@ -451,8 +466,6 @@ struct batch_packet {
     self.unlockCharacteristic = nil;
     self.notifyCharacteristic = nil;
     
-    self.publicKey = nil;
-    self.privateKey = nil;
     self.peerPublicKey = nil;
     self.sessionKey = nil;
     self.authState = Start;

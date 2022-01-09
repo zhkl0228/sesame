@@ -24,6 +24,11 @@
     return nil;
 }
 
+- (void)tryUnlock: (CBPeripheral *)peripheral {
+    [peripheral setDelegate:self];
+    [peripheral discoverServices: [self serviceUUIDs]];
+}
+
 + (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData {
     NSData *manufacturerData = [advertisementData valueForKey:CBAdvertisementDataManufacturerDataKey];
     if(manufacturerData && [manufacturerData length] >= 2) {

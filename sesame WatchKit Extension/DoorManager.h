@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DoorManager : NSObject <CBCentralManagerDelegate>
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
-@property (strong, nonatomic) NSMutableDictionary<NSString*, BleDoor*> *doorDict;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, BleDoor*> *connectingDoors;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, BleDoor*> *discoveredDoors;
 @property (strong, nonatomic, nullable) CBPeripheral *discoveredPeripheral;
 
 + (DoorManager *)sharedManager;

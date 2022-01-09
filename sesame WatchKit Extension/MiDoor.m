@@ -63,9 +63,9 @@ struct batch_packet {
 }
 
 + (MiDoor *)door: (unsigned short)productId {
-//    if(productId == 0x8cf) {
-//        return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"6c995fc25f0444dbb21d603be65dc2f59d4b53327b2e299d03cecca43fe73614"] name : @"保险柜"];
-//    }
+    if(productId == 0x8cf) {
+        return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"6c995fc25f0444dbb21d603be65dc2f59d4b53327b2e299d03cecca43fe73614"] name : @"保险柜"];
+    }
     if(productId == 0x492) {
         return [[MiDoor alloc] initWithPassword: [MiDoor hexStringToData: @"f1bfc155c355d27e49ec4dae2f513276ceb4508a75cf9217d427b2a1f3b964d4"] name : @"小米智能锁"];
     }
@@ -82,6 +82,12 @@ struct batch_packet {
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     NSLog(@"didUpdateNotificationStateForCharacteristic characteristic=%@", characteristic);
+}
+
+- (void) peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if(error == nil && [self.unlockCharacteristic isEqual: characteristic]) {
+        [peripheral readValueForCharacteristic: self.notifyCharacteristic];
+    }
 }
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -296,8 +302,6 @@ struct batch_packet {
                     [data getBytes: &ack length: sizeof(ack)];
                     if(ack.command == COMMAND_ACK && ack.status == 0) { // send auth finish
                         self.authState = WaitAuthStatus;
-                        
-                        [peripheral setNotifyValue:YES forCharacteristic:self.notifyCharacteristic];
                     }
                 }
                 break;
@@ -368,6 +372,23 @@ struct batch_packet {
     [peripheral readValueForCharacteristic: self.readCharacteristic];
 }
 
+- (NSArray<CBUUID *> *) characteristicUUIDs:(CBService *)service {
+    CBUUID *miService = [MiDoor MI_SERVICE_UUID];
+    if([miService isEqual: [service UUID]]) {
+        const CBUUID *READ_UUID = [CBUUID UUIDWithString: @"00000004-0000-1000-8000-00805f9b34fb"];
+        const CBUUID *AUTHENTICATION_UUID = [CBUUID UUIDWithString: @"00000010-0000-1000-8000-00805f9b34fb"];
+        const CBUUID *SECURITY_AUTH_UUID = [CBUUID UUIDWithString: @"00000016-0000-1000-8000-00805f9b34fb"];
+        return [NSArray arrayWithObjects: READ_UUID, AUTHENTICATION_UUID, SECURITY_AUTH_UUID, nil];
+    }
+    CBUUID *lockService = [CBUUID UUIDWithString: @"00001000-0065-6c62-2e74-6f696d2e696d"];
+    if([lockService isEqual: [service UUID]]) {
+        const CBUUID *UNLOCK_UUID = [CBUUID UUIDWithString: @"00001001-0065-6c62-2e74-6f696d2e696d"];
+        const CBUUID *LOCK_NOTIFY_UUID = [CBUUID UUIDWithString: @"00001002-0065-6c62-2e74-6f696d2e696d"];
+        return [NSArray arrayWithObjects: UNLOCK_UUID, LOCK_NOTIFY_UUID, nil];
+    }
+    return nil;
+}
+
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(nullable NSError *)error {
     NSLog(@"didDiscoverCharacteristicsForService peripheral=%@, service=%@, error=%@", peripheral, service, error);
     
@@ -412,6 +433,12 @@ struct batch_packet {
     }
 }
 
+- (NSArray<CBUUID *> *)serviceUUIDs {
+    CBUUID *miService = [MiDoor MI_SERVICE_UUID];
+    CBUUID *lockService = [CBUUID UUIDWithString: @"00001000-0065-6c62-2e74-6f696d2e696d"];
+    return [NSArray arrayWithObjects: miService, lockService, nil];
+}
+
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     NSLog(@"didDiscoverServices peripheral=%@, error=%@", peripheral, error);
     
@@ -431,15 +458,11 @@ struct batch_packet {
     self.authState = Start;
     
     NSArray<CBService *> *services = [peripheral services];
+    NSArray<CBUUID *> *array = [self serviceUUIDs];
     for(CBService *service in services) {
         CBUUID *uuid = [service UUID];
-        if([uuid isEqual:[MiDoor MI_SERVICE_UUID]]) {
-            [peripheral discoverCharacteristics:nil forService:service];
-            continue;
-        }
-        if([uuid isEqual: [CBUUID UUIDWithString: @"00001000-0065-6c62-2e74-6f696d2e696d"]]) { // lock control service
-            [peripheral discoverCharacteristics:nil forService:service];
-            continue;
+        if([array containsObject: uuid]) {
+            [peripheral discoverCharacteristics: [self characteristicUUIDs: service] forService:service];
         }
     }
 }

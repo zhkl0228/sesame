@@ -85,14 +85,25 @@
         return;
     }
     NSArray<CBCharacteristic *> *characteristics = [service characteristics];
+    NSArray<CBUUID *> *array = [self characteristicUUIDs: service];
     for(CBCharacteristic *characteristic in characteristics) {
         CBUUID *u = [characteristic UUID];
-        if([u isEqual:[CBUUID UUIDWithString:@"00002561-0000-1000-8000-00805f9b34fb"]]) {
+        if([array containsObject: u]) {
             NSLog(@"didDiscoverServices found char1 ble door");
             [self unlock:peripheral withCharacteristic:characteristic];
             break;
         }
     }
+}
+
+- (NSArray<CBUUID *> *)serviceUUIDs {
+    CBUUID *uuid = [CBUUID UUIDWithString:@"00002560-0000-1000-8000-00805f9b34fb"];
+    return [NSArray arrayWithObject: uuid];
+}
+
+- (NSArray<CBUUID *> *)characteristicUUIDs:(CBService *)service {
+    CBUUID *uuid = [CBUUID UUIDWithString:@"00002561-0000-1000-8000-00805f9b34fb"];
+    return [NSArray arrayWithObject: uuid];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
@@ -102,10 +113,11 @@
         return;
     }
     NSArray<CBService *> *services = [peripheral services];
+    NSArray<CBUUID *> *array = [self serviceUUIDs];
     for(CBService *service in services) {
         CBUUID *uuid = [service UUID];
-        if([uuid isEqual:[CBUUID UUIDWithString:@"00002560-0000-1000-8000-00805f9b34fb"]]) {
-            [peripheral discoverCharacteristics:nil forService:service];
+        if([array containsObject: uuid]) {
+            [peripheral discoverCharacteristics: [self characteristicUUIDs: service] forService:service];
             break;
         }
     }

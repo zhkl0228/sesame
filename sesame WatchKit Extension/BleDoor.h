@@ -23,6 +23,9 @@ struct mi_service_data {
 
 - (void)unlock: (CBPeripheral *)peripheral withCharacteristic: (CBCharacteristic *) characteristic;
 
+- (NSArray<CBUUID *> *)serviceUUIDs;
+- (NSArray<CBUUID *> *)characteristicUUIDs:(CBService *)service;
+
 @end
 
 NS_ASSUME_NONNULL_END

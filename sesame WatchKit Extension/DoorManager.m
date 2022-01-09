@@ -9,6 +9,7 @@
 #import <WatchKit/WatchKit.h>
 #import "DoorManager.h"
 #import "InterfaceController.h"
+#import "MiDoor.h"
 
 @implementation DoorManager
 
@@ -53,11 +54,14 @@
 - (void)startScan {
     CBManagerState state = [self.centralManager state];
     BOOL isScanning = [self.centralManager isScanning];
-    NSLog(@"startScan discoveredPeripheral=%@, isScanning=%d", self.discoveredPeripheral, isScanning);
     if(state == CBManagerStatePoweredOn && !isScanning) {
-        [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+        NSLog(@"startScan discoveredPeripheral=%@", self.discoveredPeripheral);
         InterfaceController *controller = [InterfaceController sharedController];
         [controller setGuardName:nil];
+        CBUUID *lopeDoorV2 = [CBUUID UUIDWithString:@"00002560-0000-1000-8000-00805f9b34fb"];
+        CBUUID *miService = [MiDoor MI_SERVICE_UUID];
+        CBUUID *miLockService = [CBUUID UUIDWithString: @"00001000-0065-6c62-2e74-6f696d2e696d"];
+        [self.centralManager scanForPeripheralsWithServices: [NSArray arrayWithObjects: lopeDoorV2, miService, miLockService, nil] options:nil];
     }
 }
 
@@ -98,17 +102,16 @@
     BleDoor *door = [self.doorDict valueForKey:[[peripheral identifier]UUIDString]];
     if(door) {
         [peripheral setDelegate:door];
-        [peripheral discoverServices:nil];
+        [peripheral discoverServices: [door serviceUUIDs]];
     }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
     advertisementData:(NSDictionary<NSString *,id> *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    NSLog(@"didDiscoverPeripheral central=%@, peripheral=%@, advertisementData=%@, RSSI=%@", central, peripheral, advertisementData, RSSI);
-    
     BleDoor *door = [BleDoor discoverByAdvertisementData:advertisementData];
     if(door) {
+        NSLog(@"didDiscoverPeripheral central=%@, peripheral=%@, advertisementData=%@, RSSI=%@, door=%@", central, peripheral, advertisementData, RSSI, door);
         [self tryConnectPeripheral:peripheral door: door];
     }
 }

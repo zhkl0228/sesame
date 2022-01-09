@@ -16,6 +16,14 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (NSArray<CBUUID *> *)serviceUUIDs {
+    return nil;
+}
+
+- (NSArray<CBUUID *> *) characteristicUUIDs:(CBService *)service {
+    return nil;
+}
+
 + (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData {
     NSData *manufacturerData = [advertisementData valueForKey:CBAdvertisementDataManufacturerDataKey];
     if(manufacturerData && [manufacturerData length] >= 2) {

@@ -44,6 +44,11 @@
     if(serviceData) {
         NSData *data = [serviceData objectForKey: [MiDoor MI_SERVICE_UUID]];
         if(data) {
+            struct mi_service_data {
+                uint16_t frame_control;
+                uint16_t product_id;
+                uint8_t frame_counter;
+            };
             struct mi_service_data mi_data;
             [data getBytes:&mi_data length:sizeof(struct mi_service_data)];
             NSLog(@"discoverByAdvertisementData serviceData=%@, data=%@, product_id=0x%x", serviceData, data, mi_data.product_id);

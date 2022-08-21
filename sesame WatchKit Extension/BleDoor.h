@@ -11,12 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-struct mi_service_data {
-    uint16_t frame_control;
-    uint16_t product_id;
-    uint8_t frame_counter;
-};
-
 @interface BleDoor : NSObject <CBPeripheralDelegate>
 
 + (BleDoor *)discoverByAdvertisementData: (NSDictionary<NSString *,id> *)advertisementData;

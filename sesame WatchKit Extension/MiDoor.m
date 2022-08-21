@@ -91,7 +91,7 @@ struct batch_packet {
 }
 
 - (void) tryUnlock:(CBPeripheral *)peripheral {
-    if(self.lastUnlockDate && [[NSDate now] timeIntervalSinceDate: self.lastUnlockDate] < 15) {
+    if(self.lastUnlockDate && [[NSDate now] timeIntervalSinceDate: self.lastUnlockDate] < 10) {
         NSLog(@"tryUnlock waiting door=%@", self);
         NSString *tip = [NSString stringWithFormat: @"%@已开锁", self.name];
         InterfaceController *controller = [InterfaceController sharedController];
@@ -99,6 +99,10 @@ struct batch_packet {
         return;
     }
     
+    if(self.lastTryUnlockDate && [[NSDate now] timeIntervalSinceDate: self.lastTryUnlockDate] < 5) {
+        return;
+    }
+    self.lastTryUnlockDate = [NSDate now];
     [super tryUnlock: peripheral];
 }
 

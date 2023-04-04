@@ -22,6 +22,10 @@
     BOOL isApplicationRunningInDock = [extension isApplicationRunningInDock];
     NSLog(@"applicationWillEnterForeground isApplicationRunningInDock=%d", isApplicationRunningInDock);
     
+    if(isApplicationRunningInDock) {
+        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeNotification];
+    }
+    
     DoorManager *manager = [DoorManager sharedManager];
     [manager startScan];
 }
